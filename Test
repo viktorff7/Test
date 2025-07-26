@@ -1,0 +1,95 @@
+local h = Instance.new("Hint")
+local febypassdick
+febypassdick = true
+local febypassdick
+febypassdick = true
+local febypassdick
+febypassdick = true
+h.Parent = Workspace 
+h.Text = "THE JEFF THE KILLER IS HERE HAHAHAHAHA"
+task.delay(9999999999999, function()
+    h:Remove()
+end)
+ 
+-- Configurations
+local decalId = "rbxassetid://134857024332774"
+local musicId = "rbxassetid://1847661821"
+local batchSize = 50
+local delayBetweenBatches = 0.1
+ 
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+ 
+
+local ignoreParts = {}
+for _, part in ipairs(character:GetDescendants()) do
+    if part:IsA("BasePart") then
+        ignoreParts[part] = true
+    end
+end
+ 
+
+local sky = Instance.new("Sky")
+sky.SkyboxBk = decalId
+sky.SkyboxDn = decalId
+sky.SkyboxFt = decalId
+sky.SkyboxLf = decalId
+sky.SkyboxRt = decalId
+sky.SkyboxUp = decalId
+sky.Parent = game:GetService("Lighting")
+ 
+
+local sound = Instance.new("Sound")
+sound.SoundId = musicId
+sound.Volume = 10
+sound.Pitch = 1
+sound.Looped = true
+sound.Parent = workspace
+sound:Play()
+ 
+
+local parts = {}
+for _, obj in ipairs(workspace:GetDescendants()) do
+    if obj:IsA("BasePart") and obj.Name ~= "Terrain" and not ignoreParts[obj] then
+        table.insert(parts, obj)
+    end
+end
+ 
+-- Kaboom there's go your tower watch it crumble feel the power
+local index = 1
+while index <= #parts do
+    for i = index, math.min(index + batchSize - 1, #parts) do
+        local part = parts[i]
+        for _, face in ipairs(Enum.NormalId:GetEnumItems()) do
+            local decal = Instance.new("Decal")
+            decal.Texture = decalId
+            decal.Face = face
+            decal.Parent = part
+        end
+    end
+    index += batchSize
+    task.wait(delayBetweenBatches)
+end
+
+for i,v in pairs(game.Players:GetPlayers()) do
+   if v.Name ~= me and not v.PlayerGui:FindFirstChild("Screamer") and v:FindFirstChild("PlayerGui") then
+    spawn(function()
+     local newgui = Instance.new("ScreenGui",v.PlayerGui)
+     newgui.Name = "Screamer"
+     local newimage = Instance.new("ImageLabel",newgui)
+     newimage.Image = "http://www.roblox.com/asset/?136752968746575"
+     newimage.Size = UDim2.new(1,1,1,1)
+     local s = Instance.new("Sound",newgui)
+     s.SoundId = "rbxassetid://6018028320"
+     s.Volume = 9999999999999999999999999999999999999
+     s.Looped = true
+     s:Play()
+     print("Screamed "..v.Name)
+     while wait(9.4) do
+ 
+      newimage.Parent:Destroy()
+ 
+     end
+    end)
+   end
+  end
